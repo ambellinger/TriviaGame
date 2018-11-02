@@ -13,7 +13,7 @@ var questions = [
         answers: ["Option A", "Option B", "Option C", "Option D"],
         correctanswer: "Correct choice",
         gif: $('#gif').append('<img src="TriviaGame\assets\images\bulls.gif" />'),
-    } , {
+    }, {
         question: "Question 3",
         answers: ["Option A", "Option B", "Option C", "Option D"],
         correctanswer: "Correct choice",
@@ -43,7 +43,7 @@ var questions = [
 ]
 
 //Create Global Variables
-var intervalidid;
+var intervalId;
 var setTimeoutId;
 var correctanswer;
 var unanswered;
@@ -54,135 +54,46 @@ var arrayIndex = 0;
 // Startgame. Game can't start until the start game button is clicked.
 function startGameButton() {
     $("#start").on("click", function () {
-       startgame();       
+        startgame();
     });
-} 
+}
 
 function startgame() {
     //Game begins.
-    //Clear the interval
-    clearInterval(setIntervalID);
-    //Interval starts, 30 seconds apiece
-    setIntervalID = setInterval(getQuestion, 30000)
-    
     //get the question
     function getQuestion() {
-      //Displaying the question  
-      $("#question-area").html(questions.question);
-      //Dynamically create buttons for each of the potential answers
-      for (var i = 0; i < questions.answers.length; i++) {
-        $("start").append("<button>" + questions.answers[i] + "</button>")
-        
-    }       
+        //Displaying the question  
+        $("#question-area").html(questions.question);
+        //Dynamically create buttons for each of the potential answers
+        for (var i = 0; i < questions.answers.length; i++) {
+            $("start").append("<button>" + questions.answers[i] + "</button>")
         }
-
     }
+    
+    //start the timer
+    //Clear the interval first
+    clearInterval(intervalId);
+    //Interval starts, 30 seconds apiece
+    intervalId = setInterval(getQuestion, 30000)
+
+    //on click
+    //Set three second timer to display answer result and gif
+    clearTimeOut(setTimeoutID);
+    setTimeoutID= setTImeout(displayQuestion, 3000)
 
 
-    startGameButton();
+    //create an if else statement
+    //if clicked answer ==== correct answer
+    //display a "you're correct" message and gif
+    //add a point to the score
 
-//  // there is no  click
-//  You ran out of time
-//  Display answer with animated gif
-//  Unanswer++;   
+    //else if, if clicked answer does not === correct answer
+    //disaplay a "you're wrong" message and gif
+    //add a point to the wrong score
+    
+    //if there is no click, say "You're ran out of time" message and display the gif
+    //add to the unanswered score unanswer++;
 
+}
 
-// Function displayQuestion{
-//    clearInterval(setIntervalID);
-//  setIntervalID = setInterval(getQuestion,30000);
-
-// }
-
-// function getQuestion()
-// {     
-//                      get the Questionarray
-
-// if there is no  click{
-//     You ran out of time
-// Display answer with animated gif
-//     Unanswer++;
-//            }
-// }
-
-
-// When you click on the possible answer
-// clearTimeOut(setTimeoutID);
-//  setTimeoutID= setTImeout displayQuestion, 3000)
-
-//       You compare the answer array with the correct answer after you click
-//                If it is correct
-//                  You’ve answered correctly.
-//                      Display the correct answer with the animated gif
-//  CorrectAnswer++
-//            Else
-//  IncorrectAnswer++
-//       You’ve answer incorrectly
-//       Display correct answer
-
-//****************************** */
-// MY Psuedo code 
-
-// some info 
-// set interval id
-// var intervalidid; 
-
-// you have to clearInterval(setintervalid) after each question to flush it out. 
-
-// setTimeout to give the answers with the gif
-
-// you have to make the setTimeout variable
-// setTimeoutId;
-
-// clearTimeout(setTimeoutId)
-// make sure you put it before you initialize it. 
-
-// (same thing with onclick, it will stay in memory.)
-
-// Don't run the program until the user hits the start button
-// ////
-
-// Write questions // LIst of Questions and Answers in an array
-
-// var questions = [
-//     {
-//         question:
-//         answers:
-//         correctanswer:
-//         gif:
-
-//     } {
-//         question:
-//         answers:
-//         correctanswer:
-//         gif:
-//     }
-// ]
-// store gifs locally or remotely
-// create variables.
-//     setintervalid   
-//     setTimeoutId
-//     correct answers
-//     wrong answers
-//     unanswered
-//     array index = 0
-
-// Start game
-
-// startgame
-//     setIntervalID=setInterval(getQuestion, 30000)
-
-//     function getQuestion( ) {
-//         get the Questionarray
-
-//     }
-
-// can you $.each to disply the iteration for the answer LIst
-
-// on click will compare the answer to the correct, it will count as plus one in score and a display the gif
-//     set time out should begin 
-//         setTimeoutId = setTimeout(getQuestion, 3000)
-//     if else
-//     else, wronganswers++
-//     display correct asnwer with something that says they annswered incorrectly
-
-//     the set interval is a loop in of itself. 
+startGameButton();
