@@ -65,16 +65,26 @@ function startgame() {
     //Interval starts, 30 seconds apiece
     setIntervalID = setInterval(getQuestion, 30000)
     
+    //get the question
     function getQuestion() {
-      
-
-        if there is no  click{
-            You ran out of time
-            Display answer with animated gif
-            Unanswer++;
+      //Displaying the question  
+      $("#question-area").html(questions.question);
+      //Dynamically create buttons for each of the potential answers
+      for (var i = 0; i < questions.answers.length; i++) {
+        $("start").append("<button>" + questions.answers[i] + "</button>")
+        
+    }       
         }
 
     }
+
+
+    startGameButton();
+
+//  // there is no  click
+//  You ran out of time
+//  Display answer with animated gif
+//  Unanswer++;   
 
 
 // Function displayQuestion{
@@ -109,70 +119,70 @@ function startgame() {
 //       You’ve answer incorrectly
 //       Display correct answer
 
+//****************************** */
+// MY Psuedo code 
 
-//Psuedo code 
+// some info 
+// set interval id
+// var intervalidid; 
 
-some info 
-set interval id
-var intervalidid; 
+// you have to clearInterval(setintervalid) after each question to flush it out. 
 
-you have to clearInterval(setintervalid) after each question to flush it out. 
+// setTimeout to give the answers with the gif
 
-setTimeout to give the answers with the gif
+// you have to make the setTimeout variable
+// setTimeoutId;
 
-you have to make the setTimeout variable
-setTimeoutId;
+// clearTimeout(setTimeoutId)
+// make sure you put it before you initialize it. 
 
-clearTimeout(setTimeoutId)
-make sure you put it before you initialize it. 
+// (same thing with onclick, it will stay in memory.)
 
-(same thing with onclick, it will stay in memory.)
+// Don't run the program until the user hits the start button
+// ////
 
-Don't run the program until the user hits the start button
-////
+// Write questions // LIst of Questions and Answers in an array
 
-Write questions // LIst of Questions and Answers in an array
+// var questions = [
+//     {
+//         question:
+//         answers:
+//         correctanswer:
+//         gif:
 
-var questions = [
-    {
-        question:
-        answers:
-        correctanswer:
-        gif:
+//     } {
+//         question:
+//         answers:
+//         correctanswer:
+//         gif:
+//     }
+// ]
+// store gifs locally or remotely
+// create variables.
+//     setintervalid   
+//     setTimeoutId
+//     correct answers
+//     wrong answers
+//     unanswered
+//     array index = 0
 
-    } {
-        question:
-        answers:
-        correctanswer:
-        gif:
-    }
-]
-store gifs locally or remotely
-create variables.
-    setintervalid   
-    setTimeoutId
-    correct answers
-    wrong answers
-    unanswered
-    array index = 0
+// Start game
 
-Start game
+// startgame
+//     setIntervalID=setInterval(getQuestion, 30000)
 
-startgame
-    setIntervalID=setInterval(getQuestion, 30000)
+//     function getQuestion( ) {
+//         get the Questionarray
 
-    function getQuestion( ) {
-        get the Questionarray
+//     }
 
-    }
+// can you $.each to disply the iteration for the answer LIst
 
-can you $.each to disply the iteration for the answer LIst
+// on click will compare the answer to the correct, it will count as plus one in score and a display the gif
+//     set time out should begin 
+//         setTimeoutId = setTimeout(getQuestion, 3000)
+//     if else
+//     else, wronganswers++
+//     display correct asnwer with something that says they annswered incorrectly
 
-on click will compare the answer to the correct, it will count as plus one in score and a display the gif
-    set time out should begin 
-        setTimeoutId = setTimeout(getQuestion, 3000)
-    if else
-    else, wronganswers++
-    display correct asnwer with something that says they annswered incorrectly
-
-    the set interval is a loop in of itself. 
+//     the set interval is a loop in of itself. 
