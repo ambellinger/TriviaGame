@@ -50,6 +50,7 @@ var unanswered;
 var incorrectAnswer;
 var arrayIndex = 0;
 var countdown = 30;
+var checkAnswer;
 
  
 
@@ -76,22 +77,28 @@ function startgame() {
         
         //Dynamically create buttons for each of the potential answers
         for (var i = 0; i < questions[arrayIndex].answers.length; i++) {
-            var a = $("<button>");
+            var button = $("<button>");
           // Adding a class of movie-btn to our button
-          a.addClass("answers-btn");
+          button.addClass("answers-btn");
           // Adding a data-attribute
-          a.attr("data-name", questions[arrayIndex].answers[i]);
+          button.attr("data-name", questions[arrayIndex].answers[i]);
           // Providing the initial button text
-          a.text(questions[arrayIndex].answers[i]);
+          button.text(questions[arrayIndex].answers[i]);
           // Adding the button to the buttons-view div
-          $("#answersarea").append(a);
+          $("#answersarea").append(button);
         //$("#answersarea").append('<button  data-name=" ' + questions[arrayIndex].answers[i] + ' ">' + questions[arrayIndex].answers[i] + '</button>');
-           
+        
 
         }
         //checkAnswer();
-       $("#answer-area").on("click", function(){
-            
+       $(".answers-btn").on("click", function(){
+        console.log(this);
+            if($(this).attr("data-name") === correctanswer) {
+                alert("yay!");
+                console.log("yay");
+                
+                
+            }
          //var correct= questions[arrayIndex].correctanswer;
            // if("data"
            // };
