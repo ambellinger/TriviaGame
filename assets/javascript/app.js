@@ -54,32 +54,40 @@ var arrayIndex = 0;
 // Startgame. Game can't start until the start game button is clicked.
 function startGameButton() {
     $("#start").on("click", function () {
+        $("#start").remove();
         startgame();
+        $("#timer").html(intervalId);
+        
     });
 }
 
 function startgame() {
     //Game begins.
     //get the question
-    function getQuestion() {
-        //Displaying the question  
-        $("#question-area").html(questions.question);
-        //Dynamically create buttons for each of the potential answers
-        for (var i = 0; i < questions.answers.length; i++) {
-            $("start").append("<button>" + questions.answers[i] + "</button>")
-        }
-    }
-    
-    //start the timer
+     //start the timer
     //Clear the interval first
     clearInterval(intervalId);
     //Interval starts, 30 seconds apiece
     intervalId = setInterval(getQuestion, 30000)
+    console.log(intervalId);
+   
+
+    function getQuestion() {
+        //Displaying the question  
+        $("#question-area").html(questions[arrayIndex].question);
+        
+        //Dynamically create buttons for each of the potential answers
+        for (var i = 0; i < questions[arrayIndex].answers.length; i++) {
+            $("#answersarea").append("<button>" + questions[arrayIndex].answers[i] + "</button>");
+        }
+    }
+    getQuestion();
+
 
     //on click
     //Set three second timer to display answer result and gif
-    clearTimeOut(setTimeoutID);
-    setTimeoutID= setTImeout(displayQuestion, 3000)
+    //clearTimeOut(setTimeoutID);
+    //setTimeoutID= setTImeout(displayQuestion, 3000)
 
 
     //create an if else statement
