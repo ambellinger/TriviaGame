@@ -45,14 +45,15 @@ var questions = [
 //Create Global Variables
 var intervalId;
 var setTimeoutId;
-var correctanswer;
-var unanswered;
-var incorrectAnswer;
+var correctanswer = 0;
+var unanswered = 0;
+var incorrectAnswer = 0;
 var arrayIndex = 0;
 var countdown = 30;
 var checkAnswer;
 
- 
+
+
 
 
 // Startgame. Game can't start until the start game button is clicked.
@@ -61,53 +62,82 @@ function startGameButton() {
         $("#start").remove();
         startgame();
         $("#timer").html("Seconds Left: " + countdown);
-       
-        
+
     });
 }
 
 function startgame() {
     //Game begins.
     //get the question
-  
+
 
     function getQuestion() {
         //Displaying the question  
         $("#question-area").html(questions[arrayIndex].question);
-        
+
         //Dynamically create buttons for each of the potential answers
         for (var i = 0; i < questions[arrayIndex].answers.length; i++) {
             var button = $("<button>");
-          // Adding a class of movie-btn to our button
-          button.addClass("answers-btn");
-          // Adding a data-attribute
-          button.attr("data-name", questions[arrayIndex].answers[i]);
-          // Providing the initial button text
-          button.text(questions[arrayIndex].answers[i]);
-          // Adding the button to the buttons-view div
-          $("#answersarea").append(button);
-        //$("#answersarea").append('<button  data-name=" ' + questions[arrayIndex].answers[i] + ' ">' + questions[arrayIndex].answers[i] + '</button>');
-        
+            // Adding a class of answers to our button
+            button.addClass("answers-btn");
+            // Adding a data-attribute
+            button.attr("data-name", questions[arrayIndex].answers[i]);
+            // Providing the initial button text
+            button.text(questions[arrayIndex].answers[i]);
+            // Adding the button to the buttons-view div
+            $("#answersarea").append(button);
 
         }
         //checkAnswer();
-       $(".answers-btn").on("click", function(){
-        console.log(this);
-            if($(this).attr("data-name") === correctanswer) {
+        $(".answers-btn").on("click", function () {
+            checkAnswer = $(this).attr("data-name");
+            console.log("answer picked " + checkAnswer);
+            console.log("correct answer " + questions[arrayIndex].correctanswer);
+
+            //create an if else statement
+            //if clicked answer ==== correct answer
+            //display a "you're correct" message and gif
+            //add a point to the score
+            if (checkAnswer === questions[arrayIndex].correctanswer) {
                 alert("yay!");
                 console.log("yay");
+                //display a "you're correct" message and gif
+                //add a point to the score
+                correctanswer++;
                 
-                
+                //Next Question
+                //Go to next question by adding to the index
+                arrayIndex++;
+                //Clear the buttons
+                $("#answersarea").empty();
+                //Retrieve question by calling the getQuestion function
+                getQuestion()
+
+
+                //else if, if clicked answer does not === correct answer
+            } else if (checkAnswer !== questions[arrayIndex].correctanswer) {
+                //disaplay a "you're wrong" message and gif
+                //add a point to the wrong score
+                incorrectAnswer++;
+                alert("no");
+               //Next Question
+                //Go to next question by adding to the index
+                arrayIndex++;
+                //Clear the buttons
+                $("#answersarea").empty();
+                //Retrieve question by calling the getQuestion function
+                getQuestion()
+
+
+
             }
-         //var correct= questions[arrayIndex].correctanswer;
-           // if("data"
-           // };
+
         });
     }
     getQuestion();
 
- //function checkAnswer() {
-   //   $("#")
+    //function checkAnswer() {
+    //   $("#")
 
     //on click
     //Set three second timer to display answer result and gif
@@ -115,19 +145,12 @@ function startgame() {
     //setTimeoutID= setTImeout(displayQuestion, 3000)
 
 
-    //create an if else statement
-    //if clicked answer ==== correct answer
-    //display a "you're correct" message and gif
-    //add a point to the score
 
-    //else if, if clicked answer does not === correct answer
-    //disaplay a "you're wrong" message and gif
-    //add a point to the wrong score
-    
+
     //if there is no click, say "You're ran out of time" message and display the gif
     //add to the unanswered score unanswer++;
-   //}
-   
+    //}
+
 
 }
 
