@@ -5,7 +5,7 @@ var questions = [
     {
         question: "Question 1",
         answers: ["Option A", "Option B", "Option C", "Option D"],
-        correctanswer: "Correct choice",
+        correctanswer: "Option A",
         gif: $('#gif').append('<img src="TriviaGame\assets\images\belding.gif" />'),
 
     }, {
@@ -49,6 +49,9 @@ var correctanswer;
 var unanswered;
 var incorrectAnswer;
 var arrayIndex = 0;
+var countdown = 30;
+
+ 
 
 
 // Startgame. Game can't start until the start game button is clicked.
@@ -56,7 +59,8 @@ function startGameButton() {
     $("#start").on("click", function () {
         $("#start").remove();
         startgame();
-        $("#timer").html(intervalId);
+        $("#timer").html("Seconds Left: " + countdown);
+       
         
     });
 }
@@ -64,13 +68,7 @@ function startGameButton() {
 function startgame() {
     //Game begins.
     //get the question
-     //start the timer
-    //Clear the interval first
-    clearInterval(intervalId);
-    //Interval starts, 30 seconds apiece
-    intervalId = setInterval(getQuestion, 30000)
-    console.log(intervalId);
-   
+  
 
     function getQuestion() {
         //Displaying the question  
@@ -78,11 +76,31 @@ function startgame() {
         
         //Dynamically create buttons for each of the potential answers
         for (var i = 0; i < questions[arrayIndex].answers.length; i++) {
-            $("#answersarea").append("<button>" + questions[arrayIndex].answers[i] + "</button>");
+            var a = $("<button>");
+          // Adding a class of movie-btn to our button
+          a.addClass("answers-btn");
+          // Adding a data-attribute
+          a.attr("data-name", questions[arrayIndex].answers[i]);
+          // Providing the initial button text
+          a.text(questions[arrayIndex].answers[i]);
+          // Adding the button to the buttons-view div
+          $("#answersarea").append(a);
+        //$("#answersarea").append('<button  data-name=" ' + questions[arrayIndex].answers[i] + ' ">' + questions[arrayIndex].answers[i] + '</button>');
+           
+
         }
+        //checkAnswer();
+       $("#answer-area").on("click", function(){
+            
+         //var correct= questions[arrayIndex].correctanswer;
+           // if("data"
+           // };
+        });
     }
     getQuestion();
 
+ //function checkAnswer() {
+   //   $("#")
 
     //on click
     //Set three second timer to display answer result and gif
@@ -101,6 +119,8 @@ function startgame() {
     
     //if there is no click, say "You're ran out of time" message and display the gif
     //add to the unanswered score unanswer++;
+   //}
+   
 
 }
 
