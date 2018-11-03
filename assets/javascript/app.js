@@ -49,7 +49,7 @@ var correctanswer = 0;
 var unanswered = 0;
 var incorrectAnswer = 0;
 var arrayIndex = 0;
-var countdown = 30;
+var countdown = 31;
 var checkAnswer;
 
 
@@ -61,17 +61,39 @@ function startGameButton() {
     $("#start").on("click", function () {
         $("#start").remove();
         startgame();
-        $("#timer").html("Seconds Left: " + countdown);
+       
 
     });
 }
 
 function startgame() {
     //Game begins.
+   
+   function questionTime(){
+       clearInterval(intervalId);
+       intervalId = setInterval(decrement, 1000);
+   }
+
+   function decrement() {
+       countdown--;
+       $("#timer").html("Seconds Left: " + countdown);
+
+       if (countdown === 0) {
+           alert("Time's up!");
+           stop();
+           
+           
+       }
+   }
+
+   function stop() {
+       clearInterval(intervalId);
+   }
+
     //get the question
-
-
     function getQuestion() {
+        //Time begsins
+        questionTime();
         //Displaying the question  
         $("#question-area").html(questions[arrayIndex].question);
 
@@ -112,6 +134,8 @@ function startgame() {
                 $("#answersarea").empty();
                 //Retrieve question by calling the getQuestion function
                 getQuestion()
+                countdown = 31;
+                questionTime()
 
 
                 //else if, if clicked answer does not === correct answer
@@ -127,17 +151,13 @@ function startgame() {
                 $("#answersarea").empty();
                 //Retrieve question by calling the getQuestion function
                 getQuestion()
-
-
-
+                countdown = 31;
+                questionTime()
             }
 
         });
     }
     getQuestion();
-
-    //function checkAnswer() {
-    //   $("#")
 
     //on click
     //Set three second timer to display answer result and gif
