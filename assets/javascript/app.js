@@ -61,34 +61,42 @@ function startGameButton() {
     $("#start").on("click", function () {
         $("#start").remove();
         startgame();
-       
-
     });
 }
 
 function startgame() {
     //Game begins.
-   
-   function questionTime(){
-       clearInterval(intervalId);
-       intervalId = setInterval(decrement, 1000);
-   }
 
-   function decrement() {
-       countdown--;
-       $("#timer").html("Seconds Left: " + countdown);
+    function questionTime() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
+    }
 
-       if (countdown === 0) {
-           alert("Time's up!");
-           stop();
-           
-           
-       }
-   }
+    function decrement() {
+        countdown--;
+        $("#timer").html("Seconds Left: " + countdown);
 
-   function stop() {
-       clearInterval(intervalId);
-   }
+        if (countdown === 0) {
+            alert("Time's up!");
+            stop();
+            alert("didn't answer in time");
+            unanswered++;
+            console.log(countdown);
+            //Next Question
+            //Go to next question by adding to the index
+            arrayIndex++;
+            //Clear the buttons
+            $("#answersarea").empty();
+            //Retrieve question by calling the getQuestion function
+            getQuestion()
+            countdown = 31;
+            questionTime()
+        }
+    }
+
+    function stop() {
+        clearInterval(intervalId);
+    }
 
     //get the question
     function getQuestion() {
@@ -126,7 +134,7 @@ function startgame() {
                 //display a "you're correct" message and gif
                 //add a point to the score
                 correctanswer++;
-                
+
                 //Next Question
                 //Go to next question by adding to the index
                 arrayIndex++;
@@ -144,7 +152,7 @@ function startgame() {
                 //add a point to the wrong score
                 incorrectAnswer++;
                 alert("no");
-               //Next Question
+                //Next Question
                 //Go to next question by adding to the index
                 arrayIndex++;
                 //Clear the buttons
@@ -163,14 +171,6 @@ function startgame() {
     //Set three second timer to display answer result and gif
     //clearTimeOut(setTimeoutID);
     //setTimeoutID= setTImeout(displayQuestion, 3000)
-
-
-
-
-    //if there is no click, say "You're ran out of time" message and display the gif
-    //add to the unanswered score unanswer++;
-    //}
-
 
 }
 
