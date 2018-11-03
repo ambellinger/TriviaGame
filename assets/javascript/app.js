@@ -51,10 +51,7 @@ var incorrectAnswer = 0;
 var arrayIndex = 0;
 var countdown = 31;
 var checkAnswer;
-
-
-
-
+var threeSecondalert;
 
 // Startgame. Game can't start until the start game button is clicked.
 function startGameButton() {
@@ -63,6 +60,7 @@ function startGameButton() {
         startgame();
     });
 }
+
 
 function startgame() {
     //Game begins.
@@ -98,8 +96,12 @@ function startgame() {
         clearInterval(intervalId);
     }
 
+
+
+
     //get the question
     function getQuestion() {
+
         //Time begsins
         questionTime();
         //Displaying the question  
@@ -134,16 +136,28 @@ function startgame() {
                 //display a "you're correct" message and gif
                 //add a point to the score
                 correctanswer++;
+                $("#question-area").html("howdy");
+                $("#answersarea").html("gif here");
+                $("#timer").hide();
+
+                //Display correct screen for 3 seconds
+                threeSecondalert = setTimeout(function () {
+                    arrayIndex++;
+                    //Clear the buttons
+                    $("#answersarea").empty();
+                    //Retrieve question by calling the getQuestion function
+                    getQuestion()
+                    
+                    questionTime()
+                   
+                    $("#timer").show();
+                    countdown = 31;
+
+                }, 3000);
 
                 //Next Question
                 //Go to next question by adding to the index
-                arrayIndex++;
-                //Clear the buttons
-                $("#answersarea").empty();
-                //Retrieve question by calling the getQuestion function
-                getQuestion()
-                countdown = 31;
-                questionTime()
+
 
 
                 //else if, if clicked answer does not === correct answer
@@ -171,6 +185,8 @@ function startgame() {
     //Set three second timer to display answer result and gif
     //clearTimeOut(setTimeoutID);
     //setTimeoutID= setTImeout(displayQuestion, 3000)
+
+
 
 }
 
