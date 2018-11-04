@@ -5,7 +5,8 @@ body {
 
 body {
   text-align: center;
-  background-image: url("../images/tacky.jpg");
+  background-image: url("../images/cubsbackground.jpg");
+  
 }
 
 #wrapper {
@@ -13,7 +14,8 @@ body {
   height: 95%;
   box-sizing: border-box;
   margin: 2.5% auto;
-  background-color: #fff17a;
+  background-color: white;
+  
 }
 
 #sub-wrapper {
@@ -26,7 +28,7 @@ button {
   width: 50%;
   height: 20%;
   margin: 0 auto;
-  font-size: 42px;
+  font-size: 35px;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -38,8 +40,8 @@ img {
 
 h1 {
   padding-top: 2.5%;
-  font-family: Geo, sans-serif;
-  font-size: 6.5em;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 6.0em;
   font-weight: bold;
   color: blue;
 }
@@ -63,4 +65,20 @@ h3 {
 button:hover {
   background: pink;
   border: 2px solid blue;
+}
+
+#question-area {
+  font-size: 42px;
+  margin-bottom: 5%;
+}
+
+p {
+  font-size: 30px;
+  margin: 10px;
+}
+
+#timer {
+  font-size: 20px;
+  margin-top: 2%;
+  font-weight: bold;
 }
