@@ -6,13 +6,13 @@ var questions = [
         question: "Question 1",
         answers: ["Option A", "Option B", "Option C", "Option D"],
         correctanswer: "Option A",
-        gif: $('#gif').append('<img src="TriviaGame\assets\images\belding.gif" />'),
+        gif: "assets/images/belding.gif",
 
     }, {
         question: "Question 2",
         answers: ["Option A", "Option B", "Option C", "Option D"],
-        correctanswer: "Correct choice",
-        gif: $('#gif').append('<img src="TriviaGame\assets\images\bulls.gif" />'),
+        correctanswer: "Option C",
+        gif: "assets/images/bulls.gif",
     }, {
         question: "Question 3",
         answers: ["Option A", "Option B", "Option C", "Option D"],
@@ -136,27 +136,31 @@ function startgame() {
                 //display a "you're correct" message and gif
                 //add a point to the score
                 correctanswer++;
-                $("#question-area").html("howdy");
-                $("#answersarea").html("gif here");
+
+                //Display correct screen with gifs
+                $("#question-area").html("That's correct!" + questions[arrayIndex].correctanswer + " is the correct answer!");
+                $("#answersarea").html("<img src='" + questions[arrayIndex].gif + "' alt='gif'  />");
+                //Hide the timer
                 $("#timer").hide();
 
                 //Display correct screen for 3 seconds
                 threeSecondalert = setTimeout(function () {
+                    //Next Question
+                    //Go to next question by adding to the index
                     arrayIndex++;
-                    //Clear the buttons
+                    //Clear the buttons area so that the buttons don't stack on each other
                     $("#answersarea").empty();
                     //Retrieve question by calling the getQuestion function
                     getQuestion()
-                    
+                    //restart the timer
                     questionTime()
-                   
+                    //show the timer
                     $("#timer").show();
+                    //return it to it's original time.
                     countdown = 31;
-
                 }, 3000);
 
-                //Next Question
-                //Go to next question by adding to the index
+
 
 
 
@@ -166,27 +170,37 @@ function startgame() {
                 //add a point to the wrong score
                 incorrectAnswer++;
                 alert("no");
-                //Next Question
-                //Go to next question by adding to the index
-                arrayIndex++;
-                //Clear the buttons
-                $("#answersarea").empty();
-                //Retrieve question by calling the getQuestion function
-                getQuestion()
-                countdown = 31;
-                questionTime()
+
+
+                //Display incorrect screen with gifs
+                $("#question-area").html("Sorry! That's incorrect. " + questions[arrayIndex].correctanswer + " is the correct answer!");
+                $("#answersarea").html("gif here");
+                //Hide the timer
+                $("#timer").hide();
+
+                //Display correct screen for 3 seconds
+                threeSecondalert = setTimeout(function () {
+                    //Next Question
+                    //Go to next question by adding to the index
+                    arrayIndex++;
+                    //Clear the buttons area so that the buttons don't stack on each other
+                    $("#answersarea").empty();
+                    //Retrieve question by calling the getQuestion function
+                    getQuestion()
+                    //restart the timer
+                    questionTime()
+                    //show the timer
+                    $("#timer").show();
+                    //return it to it's original time.
+                    countdown = 31;
+                }, 3000);
+
+                
             }
 
         });
     }
     getQuestion();
-
-    //on click
-    //Set three second timer to display answer result and gif
-    //clearTimeOut(setTimeoutID);
-    //setTimeoutID= setTImeout(displayQuestion, 3000)
-
-
 
 }
 
