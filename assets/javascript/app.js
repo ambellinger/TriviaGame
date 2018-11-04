@@ -51,7 +51,8 @@ var incorrectAnswer = 0;
 var arrayIndex = 0;
 var countdown = 31;
 var checkAnswer;
-var threeSecondalert;
+//var threeSecondalert;
+
 
 // Startgame. Game can't start until the start game button is clicked.
 function startGameButton() {
@@ -63,6 +64,7 @@ function startGameButton() {
 
 
 function startgame() {
+
     //Game begins.
 
     function questionTime() {
@@ -75,11 +77,10 @@ function startgame() {
         $("#timer").html("Seconds Left: " + countdown);
 
         if (countdown === 0) {
-            alert("Time's up!");
             stop();
-            alert("didn't answer in time");
             unanswered++;
             console.log(countdown);
+            endgame();
             //Next Question
             //Go to next question by adding to the index
             arrayIndex++;
@@ -96,15 +97,20 @@ function startgame() {
         clearInterval(intervalId);
     }
 
-
-
+    function endgame() {
+        if (arrayIndex > questions[arrayIndex]) {
+            $("#question-area").html("Game Over");
+            alert("game over");
+        }
+    }
 
     //get the question
     function getQuestion() {
 
         //Time begsins
         questionTime();
-        //Displaying the question  
+
+        //Displaying the question 
         $("#question-area").html(questions[arrayIndex].question);
 
         //Dynamically create buttons for each of the potential answers
@@ -123,16 +129,11 @@ function startgame() {
         //checkAnswer();
         $(".answers-btn").on("click", function () {
             checkAnswer = $(this).attr("data-name");
-            console.log("answer picked " + checkAnswer);
-            console.log("correct answer " + questions[arrayIndex].correctanswer);
-
             //create an if else statement
             //if clicked answer ==== correct answer
             //display a "you're correct" message and gif
             //add a point to the score
             if (checkAnswer === questions[arrayIndex].correctanswer) {
-                alert("yay!");
-                console.log("yay");
                 //display a "you're correct" message and gif
                 //add a point to the score
                 correctanswer++;
@@ -145,6 +146,7 @@ function startgame() {
 
                 //Display correct screen for 3 seconds
                 threeSecondalert = setTimeout(function () {
+                    endgame();
                     //Next Question
                     //Go to next question by adding to the index
                     arrayIndex++;
@@ -158,20 +160,16 @@ function startgame() {
                     $("#timer").show();
                     //return it to it's original time.
                     countdown = 31;
+                    
+
+
                 }, 3000);
-
-
-
-
 
                 //else if, if clicked answer does not === correct answer
             } else if (checkAnswer !== questions[arrayIndex].correctanswer) {
                 //disaplay a "you're wrong" message and gif
                 //add a point to the wrong score
                 incorrectAnswer++;
-                alert("no");
-
-
                 //Display incorrect screen with gifs
                 $("#question-area").html("Sorry! That's incorrect. " + questions[arrayIndex].correctanswer + " is the correct answer!");
                 $("#answersarea").html("gif here");
@@ -180,6 +178,7 @@ function startgame() {
 
                 //Display correct screen for 3 seconds
                 threeSecondalert = setTimeout(function () {
+                    endgame();
                     //Next Question
                     //Go to next question by adding to the index
                     arrayIndex++;
@@ -195,13 +194,13 @@ function startgame() {
                     countdown = 31;
                 }, 3000);
 
-                
+
             }
 
         });
+
+
     }
     getQuestion();
-
 }
-
 startGameButton();
