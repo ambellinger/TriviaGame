@@ -51,7 +51,6 @@ var incorrectAnswer = 0;
 var arrayIndex = 0;
 var countdown = 31;
 var checkAnswer;
-//var threeSecondalert;
 
 
 // Startgame. Game can't start until the start game button is clicked.
@@ -77,28 +76,33 @@ function startgame() {
         $("#timer").html("Seconds Left: " + countdown);
 
         if (countdown === 0) {
-
             stop();
             unanswered++;
             console.log(countdown);
-            
+
             //Next Question
             //Go to next question by adding to the index
             arrayIndex++;
             //Clear the buttons
             $("#answersarea").empty();
             $("#question-area").empty();
-                    if(arrayIndex===6) {
-                        $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer +   "</p> <p>Incorrect: " +incorrectAnswer+ "</p> <p>Unanswered: " + unanswered + "</p>");
-                        $("#timer").hide();
-                        $("<button>").html("restart");
-                    }
+            if (arrayIndex === 6) {
+                $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer + "</p> <p>Incorrect: " + incorrectAnswer + "</p> <p>Unanswered: " + unanswered + "</p>");
+                $("#timer").hide();
+                $("#answersarea").append("<button id=restart > Restart </button>")
+                $("#restart").on("click", function () {
+                    restart()
                     
+                }
+                
+                )
+            }
+
 
             //Retrieve question by calling the getQuestion function
             getQuestion()
             countdown = 31;
-            questionTime()               
+            questionTime()
         }
     }
 
@@ -113,11 +117,9 @@ function startgame() {
         //Time begsins
         questionTime();
 
-        //Displaying the question 
-        
-
         //Dynamically create buttons for each of the potential answers
         for (var i = 0; i < questions[arrayIndex].answers.length; i++) {
+            //Displaying the question 
             $("#question-area").html(questions[arrayIndex].question);
             var button = $("<button>");
             // Adding a class of answers to our button
@@ -156,10 +158,16 @@ function startgame() {
                     //Clear the buttons area so that the buttons don't stack on each other
                     $("#answersarea").empty();
                     $("#question-area").empty();
-                    if(arrayIndex===6) {
-                        $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer +   "</p> <p>Incorrect: " +incorrectAnswer+ "</p> <p>Unanswered: " + unanswered + "</p>");
+                    if (arrayIndex === 6) {
+                        $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer + "</p> <p>Incorrect: " + incorrectAnswer + "</p> <p>Unanswered: " + unanswered + "</p>");
                         $("#timer").hide();
-                        $("<button>").html("restart");
+                        $("#answersarea").append("<button id=restart > Restart </button>")
+                        $("#restart").on("click", function () {
+                            restart()
+                            
+                        }
+                        
+                        )
                     }
                     //Retrieve question by calling the getQuestion function
                     getQuestion()
@@ -169,10 +177,12 @@ function startgame() {
                     $("#timer").show();
                     //return it to it's original time.
                     countdown = 31;
-                    
+
 
 
                 }, 4000);
+
+               
 
                 //else if, if clicked answer does not === correct answer
             } else if (arrayIndex != 6 && checkAnswer !== questions[arrayIndex].correctanswer) {
@@ -193,10 +203,17 @@ function startgame() {
                     //Clear the buttons area so that the buttons don't stack on each other
                     $("#answersarea").empty();
                     $("#question-area").empty();
-                    if(arrayIndex===6) {
-                        $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer +   "</p> <p>Incorrect: " +incorrectAnswer+ "</p> <p>Unanswered: " + unanswered + "</p>");
+                    if (arrayIndex === 6) {
+                        $("#answersarea").html("<h2>Final Scores</h2><p>Correct:" + correctanswer + "</p> <p>Incorrect: " + incorrectAnswer + "</p> <p>Unanswered: " + unanswered + "</p>");
                         $("#timer").hide();
-                        $("<button>").html("restart");
+                        $("#answersarea").append("<button id=restart >Restart</button>")
+
+                        $("#restart").on("click", function () {
+                            restart()
+                            
+                        }
+                        
+                        )
                     }
                     //Retrieve question by calling the getQuestion function
                     getQuestion()
@@ -206,24 +223,36 @@ function startgame() {
                     $("#timer").show();
                     //return it to it's original time.
                     countdown = 31;
-                   
+
                 }, 4000);
 
 
-            } else if (arrayIndex == 6){
-                alert("heyyyyy");
             }
-            
-            
-           
         });
 
-        
-
+       
 
     }
     getQuestion();
+
+    function restart(){
+        correctanswer = 0;
+        unanswered = 0;
+        incorrectAnswer = 0;
+        countdown = 31;
+        arrayIndex = 0;
+        $("#answersarea").empty();
+        $("#question-area").empty();
+        getQuestion()
+       
+   }
 }
+
+ 
 
 
 startGameButton();
+
+//Errors remaining
+//The 3 second page does not appear if the question goes unanswered. 
+//CSS is also uglayyy
